@@ -19,8 +19,10 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      Alert.alert('User logged in:', response.user.email);
-
+      console.log('User logged in:', response.user.email);
+      navigation.navigate('MainNavigator', {
+        screen: 'Profile'
+      });
       const userId = response.user.uid;
       const userDocRef = doc(ARCHIVES_DB, 'users', userId);
       const docSnap = await getDoc(userDocRef);
@@ -41,7 +43,7 @@ export default function LoginScreen() {
   };
 
   const handlePress = () => {
-    navigation.navigate('SignUpScreen'); // Corrected the navigation call
+    navigation.navigate('SignUpScreen'); 
   };
 
   return (
